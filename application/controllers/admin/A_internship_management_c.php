@@ -43,7 +43,12 @@ class A_internship_management_c extends CI_Controller {
 		$data3['mentor'] = $this->a_internship_management_m->read_mentor()->result();
 		$data1['table'] = $this->a_internship_management_m->read_table()->result();
 		$data = $data1 + $data2 + $data3;
-		$this->template->load('admin/A_static_v','admin/a_internship_management_v',$data);
+		if ( $this->input->is_ajax_request() ){
+			$this->load->view('admin/a_internship_management_table_v',$data);
+		}else{
+			$this->template->load('admin/A_static_v','admin/a_internship_management_v',$data);	
+		}
+		
 		
 	}
 
@@ -70,19 +75,25 @@ class A_internship_management_c extends CI_Controller {
 		$id_mentor1 = $this->input->post('mentor1');
 		$id_mentor2 = $this->input->post('mentor2');
 
-		$project = $this->a_internship_management_m->get_project_input($id_student)->row();
-		$project_id = $project->project_id;
+		if($id_mentor1!=$id_mentor2){
+			$project = $this->a_internship_management_m->get_project_input($id_student)->row();
+			$project_id = $project->project_id;
 
-		$data1 = array(
-			'project_id' => $project_id,
-			'mentor_id' => $id_mentor1
-			 );
-		$data2 =array(
-			'project_id' => $project_id,
-			'mentor_id' => $id_mentor2
-			 );
-		$this->a_internship_management_m->make_relation('mg_project_management',$data1);
-		$this->a_internship_management_m->make_relation('mg_project_management',$data2);
+			$data1 = array(
+				'project_id' => $project_id,
+				'mentor_id' => $id_mentor1
+				 );
+			$data2 =array(
+				'project_id' => $project_id,
+				'mentor_id' => $id_mentor2
+				 );
+			$this->a_internship_management_m->make_relation('mg_project_management',$data1);
+			$this->a_internship_management_m->make_relation('mg_project_management',$data2);
+		}else{
+			$this->a_internship_management_m->make_relation('mg_project_management',$data1);
+		}
+
+		
 	}
 
 	// function table(){

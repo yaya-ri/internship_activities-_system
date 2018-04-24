@@ -125,7 +125,7 @@
 						
 					},
 					error: function(){
-						swal("Gagal!", "ada kesalahan", "error");
+						swal("Gagal!", "Username sudah dipakai!!", "error");
 					}	
 				});
 			});

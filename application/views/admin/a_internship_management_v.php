@@ -35,7 +35,7 @@
 	    <thead>
 	        <tr>
 	            <th class="text-center">No</th>
-	            <th>Mahasiswa</th>
+	            <th>Mahasiswa (Username)</th>
 	            <th>Mentor</th>
 	            <th class="text-center">Status</th>	            
 	        </tr>

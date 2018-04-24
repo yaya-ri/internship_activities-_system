@@ -30,20 +30,43 @@ class A_student_management_c extends CI_Controller {
 		$namaBelakang 	= $this->input->post('slastname');
 		$email 			= $this->input->post('semail');
 
-		$data = array (
-			'student_username' => $username,
-			'student_first_name' => $namaDepan,
-			'student_last_name' => $namaBelakang,
-			'student_email' => $email
-			 );
+		$check_username = $this->a_student_management_m->check_single_username($student_id)->row();
+		$check_all_username=$this->a_student_management_m->check_all_username($username)->num_rows();
+		
+		if($check_username->student_username==$username){
+			$data = array (
+				'student_username' => $username,
+				'student_first_name' => $namaDepan,
+				'student_last_name' => $namaBelakang,
+				'student_email' => $email
+				 );
 
-		$where = array (
-			'student_id' => $student_id
-			);
+			$where = array (
+				'student_id' => $student_id
+				);
 
-		$table = "md_student";
+			$table = "md_student";
 
-		$this->a_student_management_m->update_form($where,$data,$table);
+			$this->a_student_management_m->update_form($where,$data,$table);
+		}else if($check_all_username==0){
+			$data = array (
+				'student_username' => $username,
+				'student_first_name' => $namaDepan,
+				'student_last_name' => $namaBelakang,
+				'student_email' => $email
+				 );
+
+			$where = array (
+				'student_id' => $student_id
+				);
+
+			$table = "md_student";
+
+			$this->a_student_management_m->update_form($where,$data,$table);
+		}else{
+			$this->a_student_management_m->update_form($where,$data,$table);
+		}
+		
 
 	}
 
@@ -60,9 +83,9 @@ class A_student_management_c extends CI_Controller {
 	public function add_data(){
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		$check_username=$this->a_student_management_m->check_username($username)->num_rows();
+		$check_all_username=$this->a_student_management_m->check_username($username)->num_rows();
 
-		if($check_username==0){
+		if($check_all_username==0){
 			$data = array(
 				'student_username' => $username,
 				'student_password' => $password,

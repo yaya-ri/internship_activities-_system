@@ -34,8 +34,9 @@
 					<?php if(!empty($a->progress_id)){ ?>
 						<input id="progress_p" type="checkbox" class="progressbar_chkbox" name="progress[]" value="<?php echo $a->progress_id;?>" <?php if($a->progress_status==1){?> checked <?php } ?> ><?php echo $a->progress_name ?>
 						</input><br>
-					<?php } ?>
-				<?php } ?>
+					<?php } else{ ?>
+					<p>belum ada</p>
+				<?php } }?>
 
 			    <div class="">
 			    	<button class="btn btn-info glyphicon" title="Simpan"><span>Simpan</span></button>

@@ -46,5 +46,10 @@
 			$query = $this->db->query("SELECT * FROM mg_mention WHERE activity_id=$activity_id");
 			return $query;
 		}
+
+		function change_mention_read($activity_id){
+			$query = $this->db->query("UPDATE mg_mention SET mention_read = 1 WHERE activity_id=$activity_id AND mention_status=2");
+			return $query;
+		}
 	}
 ?>

@@ -77,7 +77,7 @@
 			function refreshTable(){
 				$.ajax({
 					type: "get",
-					url: "<?php echo base_url('index.php/admin/a_internship_management_c/table')?>",
+					url: "<?php echo base_url('index.php/admin/a_internship_management_c/')?>",
 					success: function(data){
 						debugger;
             			$('tbody#data').html(data);
@@ -95,7 +95,7 @@
 				url: "<?php echo base_url('index.php/admin/a_internship_management_c/add_relation')?>",
 				data: $('form.form-horizontal').serialize(),
 					success: function(response){
-						swal("Berhasil!", "Data berhasil di diupdate", "success");
+						swal("Berhasil!", "Berhasil", "success");
 						//$('#tabel').append(response);
 
 						$('#add-management').modal('hide');
@@ -105,7 +105,7 @@
 						
 					},
 					error: function(){
-						swal("Gagal!", "ada kesalahan", "error");
+						swal("Gagal!", "Mentor 1 dan 2 harus beda", "error");
 					}	
 				});
 			});

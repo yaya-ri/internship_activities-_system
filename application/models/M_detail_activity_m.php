@@ -38,6 +38,11 @@
 			$this->db->update($table,$data);
 		}
 
+		function change_mention_read($activity_id){
+			$query = $this->db->query("UPDATE mg_mention SET mention_read = 1 WHERE activity_id=$activity_id AND mention_status=1");
+			return $query;
+		}
+
 		
 	}
  ?>

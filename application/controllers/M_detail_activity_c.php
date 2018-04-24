@@ -23,6 +23,22 @@
 			
 		}
 
+		function read_notification($activity_id){
+			$data3['notifikasi'] = $this->m_detail_activity_m->read_notification()->result();
+			$data1['mg_activity']=$this->m_detail_activity_m->read($activity_id)->result();
+			$data2['mg_student']= $this->m_detail_activity_m->read_mention($activity_id)->result();
+			$data=$data1+$data2+$data3;
+
+			$this->m_detail_activity_m->change_mention_read($activity_id);
+
+			if($this->input->is_ajax_request()){
+				$this->load->view('m_detail_activity_v',$data);
+			}else{
+				$this->template->load('m_static_v','m_detail_activity_v',$data);
+			}
+			
+		}
+
 		public function mentor_mention(){
 			$id_user 		= $this->session->userdata('id');
 			$status			= 2;

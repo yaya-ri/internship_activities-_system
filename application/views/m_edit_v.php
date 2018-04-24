@@ -118,7 +118,7 @@
 								        </div>
 								        <div class="modal-footer">
 						                    <button class="btn btn-info" type="submit"> Simpan&nbsp;</button>
-						                    <button type="button" class="btn btn-danger glyphicon glyphicon-floppy-save" data-dismiss="modal" title="Simpan PDF"></button>
+						                    <!-- <button type="button" class="btn btn-danger glyphicon glyphicon-floppy-save" data-dismiss="modal" title="Simpan PDF"></button> -->
 						                </div>
 								</form>
 		            	<br>

@@ -30,19 +30,42 @@ class A_mentor_management_c extends CI_Controller {
 		$namaBelakang = $this->input->post('mlastname');
 		$email = $this->input->post('memail');
 
-		$data = array(
-			'mentor_username' => $username,
-			'mentor_first_name' => $namaDepan,
-			'mentor_last_name' => $namaBelakang,
-			'mentor_email' => $email
-			 );
-		$where = array (
-			'mentor_id' => $mentor_id
-			);
+		$check_username = $this->a_mentor_management_m->check_single_username($mentor_id)->row();
+		$check_all_username=$this->a_mentor_management_m->check_all_username($username)->num_rows();
 
-		$table='md_mentor';
+		if($check_username->mentor_username==$username){
+			$data = array(
+				'mentor_username' => $username,
+				'mentor_first_name' => $namaDepan,
+				'mentor_last_name' => $namaBelakang,
+				'mentor_email' => $email
+				 );
+			$where = array (
+				'mentor_id' => $mentor_id
+				);
 
-		$this->a_mentor_management_m->update_form($where,$data,$table);
+			$table='md_mentor';
+
+			$this->a_mentor_management_m->update_form($where,$data,$table);
+		}else if($check_all_username==0){
+			$data = array(
+				'mentor_username' => $username,
+				'mentor_first_name' => $namaDepan,
+				'mentor_last_name' => $namaBelakang,
+				'mentor_email' => $email
+				 );
+			$where = array (
+				'mentor_id' => $mentor_id
+				);
+
+			$table='md_mentor';
+
+			$this->a_mentor_management_m->update_form($where,$data,$table);
+			
+		}else{
+			$this->a_mentor_management_m->update_form($where,$data,$table);
+		}
+		
 
 	}
 
@@ -59,8 +82,8 @@ class A_mentor_management_c extends CI_Controller {
 	public function add_data(){
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		$check_username=$this->a_mentor_management_m->check_username($username)->num_rows();
-		if($check_username==0){
+		$check_all_username=$this->a_mentor_management_m->check_all_username($username)->num_rows();
+		if($check_all_username==0){
 			$data = array(
 				'mentor_username' => $username,
 				'mentor_password' => $password,

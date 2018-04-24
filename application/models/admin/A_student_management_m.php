@@ -3,7 +3,7 @@
 	class A_student_management_m extends CI_Model{
 
 		function read_profile($table){
-			$query = $this->db->query("SELECT * FROM $table");
+			$query = $this->db->query("SELECT * FROM $table ORDER BY student_username ASC");
 			return $query;
 		}
 
@@ -46,8 +46,13 @@
 
 		}
 
-		function check_username($username){
+		function check_all_username($username){
 			$query = $this->db->query("SELECT * FROM md_student WHERE student_username='$username'");
+			return $query;
+		}
+
+		function check_single_username($id){
+			$query = $this->db->query("SELECT * FROM md_student WHERE student_id=$id");
 			return $query;
 		}
 

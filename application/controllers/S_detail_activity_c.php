@@ -27,6 +27,24 @@ class S_detail_activity_c extends CI_Controller {
 		
 	}
 
+	public function read_notification($activity_id){
+		$student_id = $this->session->userdata('id');
+        $data1['notifikasi'] = $this->s_header_m->read($student_id)->result();
+		$data2['description'] = $this->s_detail_activity_m->read_activity_desc($activity_id)->result();
+		$data3['mention']  = $this->s_detail_activity_m->read_mention($activity_id)->result();
+		$data4['check']= $this->s_detail_activity_m->mention_check($activity_id)->result();
+		$data5['path']= $this->s_detail_activity_m->path($student_id)->result();
+		$data = $data1 + $data2 + $data3 + $data4 + $data5;
+		$this->s_detail_activity_m->change_mention_read($activity_id);
+
+		if($this->input->is_ajax_request()){
+			$this->load->view('s_detail_activity_v',$data);
+		}else{
+			$this->template->load('static_v','s_detail_activity_v',$data);
+		}
+		
+	}
+
 	public function mentor_mention(){
 		$status			= 1;
 		$nama_mentor 	= $this->input->post('mentor');

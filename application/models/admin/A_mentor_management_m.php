@@ -21,8 +21,13 @@
 			$this->db->insert($table,$data);
 		}
 
-		function check_username($username){
+		function check_all_username($username){
 			$query = $this->db->query("SELECT * FROM md_mentor WHERE mentor_username='$username'");
+			return $query;
+		}
+
+		function check_single_username($id){
+			$query = $this->db->query("SELECT * FROM md_mentor WHERE mentor_id=$id");
 			return $query;
 		}
 

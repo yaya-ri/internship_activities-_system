@@ -75,14 +75,14 @@
                       </a>
                     </div>  
                   </li>
-                  <li class="sub-menu">
+                  <!-- <li class="sub-menu">
                     <div class="menu-profile">
                       <a href="<?php echo base_url();?>index.php/m_all_activity_c" >
                           <i class="glyphicon glyphicon-th-list"></i>
                           <span>Aktivitas</span>
                       </a>
                     </div>  
-                  </li>                   
+                  </li> -->                   
 
               </ul>
               <!-- sidebar menu end-->
